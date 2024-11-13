@@ -12,9 +12,15 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 
+type Preferences = {
+  necessary: boolean;
+  analytics: boolean;
+  marketing: boolean;
+};
+
 const Footer = () => {
   const [showSettings, setShowSettings] = useState(false);
-  const [preferences, setPreferences] = useState(() => {
+  const [preferences, setPreferences] = useState<Preferences>(() => {
     const saved = localStorage.getItem('cookie-consent');
     if (saved === 'all') {
       return { necessary: true, analytics: true, marketing: true };
@@ -34,17 +40,33 @@ const Footer = () => {
     setShowSettings(false);
   };
 
+  const handleAnalyticsChange = (checked: boolean) => {
+    setPreferences((prev) => ({
+      ...prev,
+      analytics: checked,
+    }));
+  };
+
+  const handleMarketingChange = (checked: boolean) => {
+    setPreferences((prev) => ({
+      ...prev,
+      marketing: checked,
+    }));
+  };
+
   return (
     <footer className="bg-muted py-16">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Sektion för Almfors */}
           <div>
             <h3 className="font-bold text-lg mb-4">Almfors</h3>
             <p className="text-muted-foreground">
               Vi skapar moderna webbplatser och hanterar sociala medier som driver resultat.
             </p>
           </div>
-          
+
+          {/* Tjänster */}
           <div>
             <h4 className="font-semibold mb-4">Tjänster</h4>
             <ul className="space-y-2">
@@ -65,7 +87,8 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          
+
+          {/* Företag */}
           <div>
             <h4 className="font-semibold mb-4">Företag</h4>
             <ul className="space-y-2">
@@ -86,14 +109,15 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          
+
+          {/* Sociala medier */}
           <div>
             <h4 className="font-semibold mb-4">Följ oss</h4>
             <div className="flex space-x-4">
-              <a 
-                href="https://instagram.com/almfors.se" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://instagram.com/almfors.se"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
                 <Instagram className="h-5 w-5" />
@@ -101,7 +125,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="mt-16 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
@@ -114,7 +138,7 @@ const Footer = () => {
               <Link to="/kundservice" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Villkor
               </Link>
-              <button 
+              <button
                 onClick={() => setShowSettings(true)}
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
@@ -125,6 +149,7 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Cookie-inställningar Dialog */}
       <Dialog open={showSettings} onOpenChange={setShowSettings}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
@@ -133,56 +158,31 @@ const Footer = () => {
               Hantera dina cookie-preferenser. Nödvändiga cookies kan inte stängas av eftersom de krävs för att webbplatsen ska fungera.
             </DialogDescription>
           </DialogHeader>
-
           <div className="space-y-6 py-4">
-            <div className="flex items-center justify-between space-x-4">
-              <div className="space-y-1">
-                <Label>Nödvändiga cookies</Label>
-                <p className="text-sm text-muted-foreground">
-                  Krävs för grundläggande funktionalitet
-                </p>
-              </div>
+            <div className="flex items-center justify-between">
+              <Label>Nödvändiga cookies</Label>
               <Switch checked disabled />
             </div>
-
-            <div className="flex items-center justify-between space-x-4">
-              <div className="space-y-1">
-                <Label>Analys</Label>
-                <p className="text-sm text-muted-foreground">
-                  Hjälper oss förstå hur webbplatsen används
-                </p>
-              </div>
+            <div className="flex items-center justify-between">
+              <Label>Analys</Label>
               <Switch
                 checked={preferences.analytics}
-                onCheckedChange={(checked) =>
-                  setPreferences((prev) => ({ ...prev, analytics: checked }))
-                }
+                onCheckedChange={handleAnalyticsChange}
               />
             </div>
-
-            <div className="flex items-center justify-between space-x-4">
-              <div className="space-y-1">
-                <Label>Marknadsföring</Label>
-                <p className="text-sm text-muted-foreground">
-                  Används för riktad marknadsföring
-                </p>
-              </div>
+            <div className="flex items-center justify-between">
+              <Label>Marknadsföring</Label>
               <Switch
                 checked={preferences.marketing}
-                onCheckedChange={(checked) =>
-                  setPreferences((prev) => ({ ...prev, marketing: checked }))
-                }
+                onCheckedChange={handleMarketingChange}
               />
             </div>
           </div>
-
           <div className="flex justify-end gap-3">
             <Button variant="outline" onClick={() => setShowSettings(false)}>
               Avbryt
             </Button>
-            <Button onClick={handleSavePreferences}>
-              Spara inställningar
-            </Button>
+            <Button onClick={handleSavePreferences}>Spara inställningar</Button>
           </div>
         </DialogContent>
       </Dialog>

@@ -1,10 +1,4 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Send, Mail, Phone, MapPin } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { submitContactForm } from '@/lib/api';
 
@@ -13,7 +7,7 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault(); // Förhindra standardformulärets beteende
     setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
@@ -45,7 +39,42 @@ const Contact = () => {
 
   return (
     <section className="py-24 relative overflow-hidden" id="contact">
-      {/* Rest of the component remains the same */}
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <input
+          type="text"
+          name="name"
+          placeholder="Namn"
+          required
+          className="input"
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="E-post"
+          required
+          className="input"
+        />
+        <input
+          type="text"
+          name="subject"
+          placeholder="Ämne"
+          required
+          className="input"
+        />
+        <textarea
+          name="message"
+          placeholder="Meddelande"
+          required
+          className="textarea"
+        ></textarea>
+        <button
+          type="submit"
+          className="button"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Skickar..." : "Skicka"}
+        </button>
+      </form>
     </section>
   );
 };
