@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://almfors.se/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 10
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+
+# Allow important pages to be crawled
+Allow: /webbdesign
+Allow: /sociala-medier
+Allow: /bestall
+Allow: /varfor-almfors
+Allow: /om-oss
+Allow: /kundservice
+Allow: /blogg
