@@ -1,13 +1,40 @@
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
+import { Card, CardContent } from '@/components/ui/card';
+import { Phone, MessageSquare, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { MessageCircle } from 'lucide-react';
 
-const CustomerServiceHero = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
+const supportChannels = [
+  {
+    icon: Phone,
+    title: 'Ring oss',
+    description: 'Vi finns tillgängliga vardagar',
+    contact: '+46 (0)70 22 180 22',
+    action: 'tel:+46702218022',
+    color: 'accent-blue',
+    animation: { rotate: [0, 10, -10, 0] },
+    gradient: 'from-[hsl(var(--accent-blue))] to-[hsl(var(--accent-purple))]'
+  },
+  {
+    icon: MessageSquare,
+    title: 'Kontakta oss',
+    description: 'Vi svarar normalt inom 24 timmar',
+    buttonText: 'Skicka meddelande',
+    color: 'accent-purple',
+    animation: { y: [-3, 3, -3] },
+    gradient: 'from-[hsl(var(--accent-purple))] to-[hsl(var(--accent-teal))]'
+  },
+  {
+    icon: Clock,
+    title: 'Öppettider',
+    description: 'Måndag-Fredag',
+    contact: '09:00-17:00',
+    color: 'accent-orange',
+    animation: { scale: [1, 1.1, 1] },
+    gradient: 'from-[hsl(var(--accent-teal))] to-[hsl(var(--accent-orange))]'
+  }
+];
 
+const CustomerServiceSupport = () => {
   const scrollToContact = (e: React.MouseEvent) => {
     e.preventDefault();
     const contactSection = document.getElementById('contact');
@@ -16,40 +43,31 @@ const CustomerServiceHero = () => {
     }
   };
 
-  const scrollToFAQ = () => {
-    const faqSection = document.getElementById('faq');
-    if (faqSection) {
-      faqSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <section className="min-h-screen flex items-center justify-center pt-16 pb-32 overflow-hidden relative">
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
-          className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-[0.02]"
-          style={{ y }}
-        />
-        
+    <section className="py-24 relative overflow-hidden">
+      <div className="absolute inset-0">
         <motion.div
+          initial={{ opacity: 0 }}
           animate={{ 
-            opacity: [0.03, 0.08, 0.03],
+            opacity: [0.03, 0.06, 0.03],
             scale: [1, 1.1, 1],
-            rotate: [0, 5, 0]
           }}
           transition={{ 
             duration: 8,
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute top-20 left-[20%] w-[30rem] h-[30rem] rounded-full bg-[hsl(var(--accent-blue))] blur-[100px] opacity-10"
+          className="absolute top-0 left-0 w-full h-full"
+          style={{
+            background: 'radial-gradient(circle at 0% 0%, hsl(var(--accent-blue) / 0.15) 0%, transparent 50%)',
+          }}
         />
         
         <motion.div
+          initial={{ opacity: 0 }}
           animate={{ 
-            opacity: [0.05, 0.1, 0.05],
+            opacity: [0.03, 0.06, 0.03],
             scale: [1, 1.2, 1],
-            rotate: [0, -5, 0]
           }}
           transition={{ 
             duration: 10,
@@ -57,69 +75,105 @@ const CustomerServiceHero = () => {
             ease: "easeInOut",
             delay: 1
           }}
-          className="absolute bottom-40 right-[15%] w-[40rem] h-[40rem] rounded-full bg-[hsl(var(--accent-purple))] blur-[120px] opacity-10"
+          className="absolute bottom-0 right-0 w-full h-full"
+          style={{
+            background: 'radial-gradient(circle at 100% 100%, hsl(var(--accent-purple) / 0.15) 0%, transparent 50%)',
+          }}
         />
       </div>
 
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="container mx-auto px-4 relative"
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="max-w-4xl mx-auto text-center space-y-8"
-        >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.1, type: "spring" }}
-            className="w-20 h-20 mx-auto mb-8 rounded-full bg-primary/10 flex items-center justify-center"
-          >
-            <MessageCircle className="w-10 h-10 text-primary" />
-          </motion.div>
-
-          <motion.h1
-            className="text-4xl md:text-7xl font-bold leading-tight tracking-tighter gradient-text"
-          >
-            Hur kan vi hjälpa dig?
-          </motion.h1>
-          
-          <motion.p
-            className="text-lg md:text-xl text-muted-foreground leading-relaxed"
-          >
-            Vi finns här för att hjälpa dig med alla frågor och funderingar. 
-            Vårt dedikerade supportteam är redo att assistera dig med vad du än behöver.
-          </motion.p>
-
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center pt-8"
-          >
-            <Button 
-              size="lg" 
-              className="text-lg relative overflow-hidden group gradient-border hover-glow"
-              onClick={scrollToContact}
+      <div className="container mx-auto px-4 relative">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {supportChannels.map((channel, index) => (
+            <motion.div
+              key={channel.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
             >
-              Kontakta support
-            </Button>
-            
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="text-lg hover-lift"
-              onClick={scrollToFAQ}
-            >
-              Läs vanliga frågor
-            </Button>
-          </motion.div>
-        </motion.div>
-      </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="h-full"
+              >
+                <Card className="h-full relative group overflow-hidden hover-lift">
+                  <motion.div
+                    className={`absolute inset-0 bg-gradient-to-br ${channel.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
+                    initial={false}
+                  />
+                  
+                  <CardContent className="p-8 flex flex-col items-center text-center space-y-6">
+                    <motion.div
+                      whileHover={channel.animation}
+                      transition={{ 
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      className={`w-16 h-16 rounded-2xl bg-[hsl(var(--${channel.color}))]/10 flex items-center justify-center relative`}
+                    >
+                      <motion.div
+                        className="absolute inset-0 rounded-2xl bg-primary/5"
+                        animate={{ 
+                          scale: [1, 1.2, 1],
+                          rotate: [0, 90, 0]
+                        }}
+                        transition={{ 
+                          duration: 6,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                      />
+                      <channel.icon className={`w-8 h-8 text-[hsl(var(--${channel.color}))] relative z-10`} />
+                    </motion.div>
+
+                    <div className="space-y-2">
+                      <h3 className={`text-xl font-semibold text-[hsl(var(--${channel.color}))]`}>
+                        {channel.title}
+                      </h3>
+                      <p className="text-muted-foreground">
+                        {channel.description}
+                      </p>
+                    </div>
+
+                    {channel.buttonText ? (
+                      <Button 
+                        variant="ghost" 
+                        onClick={scrollToContact}
+                        className={`w-full mt-auto hover:bg-[hsl(var(--${channel.color}))]/10 hover:text-[hsl(var(--${channel.color}))] relative group overflow-hidden`}
+                      >
+                        <motion.span
+                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+                        />
+                        <span className="relative z-10">{channel.buttonText}</span>
+                      </Button>
+                    ) : channel.action ? (
+                      <a href={channel.action} className="mt-auto w-full">
+                        <Button 
+                          variant="ghost" 
+                          className={`w-full hover:bg-[hsl(var(--${channel.color}))]/10 hover:text-[hsl(var(--${channel.color}))] relative group overflow-hidden`}
+                        >
+                          <motion.span
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+                          />
+                          <span className="relative z-10">{channel.contact}</span>
+                        </Button>
+                      </a>
+                    ) : (
+                      <p className="text-lg font-medium mt-auto">
+                        {channel.contact}
+                      </p>
+                    )}
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };
 
-export default CustomerServiceHero;
+export default CustomerServiceSupport;

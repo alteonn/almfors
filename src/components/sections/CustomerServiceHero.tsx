@@ -2,15 +2,25 @@ import { useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 const CustomerServiceHero = () => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
+  const scrollToContact = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const scrollToFAQ = () => {
-    document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' });
+    const faqSection = document.getElementById('faq');
+    if (faqSection) {
+      faqSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -89,14 +99,13 @@ const CustomerServiceHero = () => {
           <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center pt-8"
           >
-            <Link to="#contact">
-              <Button 
-                size="lg" 
-                className="text-lg relative overflow-hidden group gradient-border hover-glow"
-              >
-                Kontakta support
-              </Button>
-            </Link>
+            <Button 
+              size="lg" 
+              className="text-lg relative overflow-hidden group gradient-border hover-glow"
+              onClick={scrollToContact}
+            >
+              Kontakta support
+            </Button>
             
             <Button 
               size="lg" 
