@@ -10,8 +10,6 @@ import WebdesignPage from '@/pages/WebdesignPage';
 import LoginPage from '@/pages/LoginPage';
 import PrivacyPage from '@/pages/PrivacyPage';
 import TermsPage from '@/pages/TermsPage';
-import BlogPage from '@/pages/BlogPage';
-import BlogPostPage from '@/pages/BlogPostPage';
 import Footer from '@/components/Footer';
 import { useScrollRestoration } from '@/hooks/useScrollRestoration';
 
@@ -32,8 +30,6 @@ const AppRoutes = () => {
         <Route path="/logga-in" element={<LoginPage />} />
         <Route path="/integritetspolicy" element={<PrivacyPage />} />
         <Route path="/villkor" element={<TermsPage />} />
-        <Route path="/blogg" element={<BlogPage />} />
-        <Route path="/blogg/:slug" element={<BlogPostPage />} />
       </Routes>
       <Footer />
     </>

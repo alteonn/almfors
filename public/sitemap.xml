@@ -45,7 +45,19 @@
   <url>
     <loc>https://almfors.se/logga-in</loc>
     <lastmod>2024-03-16</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://almfors.se/integritetspolicy</loc>
+    <lastmod>2024-03-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://almfors.se/villkor</loc>
+    <lastmod>2024-03-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
   </url>
 </urlset>

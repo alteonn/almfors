@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { NavLink, Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { useState } from 'react';
+import { NavLink, Link, useLocation } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import {
   Home,
   Globe,
@@ -9,21 +9,19 @@ import {
   Share2,
   HelpCircle,
   Users,
-  BookOpen,
   MessageCircle,
   Menu,
   LogIn,
-} from "lucide-react";
+} from 'lucide-react';
 
 const menuItems = [
-  { name: "Hem", href: "/", icon: Home },
-  { name: "Webbdesign", href: "/webbdesign", icon: Globe },
-  { name: "Beställ", href: "/bestall", icon: ShoppingCart },
-  { name: "Sociala medier", href: "/sociala-medier", icon: Share2 },
-  { name: "Varför Almfors?", href: "/varfor-almfors", icon: HelpCircle },
-  { name: "Om oss", href: "/om-oss", icon: Users },
-  { name: "Blogg", href: "/blogg", icon: BookOpen },
-  { name: "Kundservice", href: "/kundservice", icon: MessageCircle },
+  { name: 'Hem', href: '/', icon: Home },
+  { name: 'Webbdesign', href: '/webbdesign', icon: Globe },
+  { name: 'Beställ', href: '/bestall', icon: ShoppingCart },
+  { name: 'Sociala medier', href: '/sociala-medier', icon: Share2 },
+  { name: 'Varför Almfors?', href: '/varfor-almfors', icon: HelpCircle },
+  { name: 'Om oss', href: '/om-oss', icon: Users },
+  { name: 'Kundservice', href: '/kundservice', icon: MessageCircle },
 ];
 
 const Navigation = () => {
@@ -46,10 +44,10 @@ const Navigation = () => {
                 to={item.href}
                 className={({ isActive }) =>
                   cn(
-                    "px-3 py-2 rounded-md text-sm font-medium transition-colors",
+                    'px-3 py-2 rounded-md text-sm font-medium transition-colors',
                     isActive
-                      ? "bg-muted text-primary"
-                      : "text-muted-foreground hover:text-primary hover:bg-muted/50",
+                      ? 'bg-muted text-primary'
+                      : 'text-muted-foreground hover:text-primary hover:bg-muted/50'
                   )
                 }
               >
@@ -90,10 +88,10 @@ const Navigation = () => {
                 onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
                   cn(
-                    "flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors",
+                    'flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors',
                     isActive
-                      ? "bg-muted text-primary"
-                      : "text-muted-foreground hover:text-primary hover:bg-muted/50",
+                      ? 'bg-muted text-primary'
+                      : 'text-muted-foreground hover:text-primary hover:bg-muted/50'
                   )
                 }
               >

@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { Helmet } from 'react-helmet-async';
 
 interface SEOProps {
   title: string;
@@ -10,39 +10,41 @@ interface SEOProps {
   schema?: object;
 }
 
-const SEO = ({
-  title,
-  description,
-  canonical = "https://almfors.se",
-  type = "website",
-  name = "Almfors",
-  image = "https://almfors.se/og-image.jpg",
-  schema,
+const SEO = ({ 
+  title, 
+  description, 
+  canonical = 'https://almfors.se', 
+  type = 'website',
+  name = 'Almfors',
+  image = 'https://almfors.se/og-image.jpg',
+  schema
 }: SEOProps) => {
   const fullTitle = `${title} | ${name}`;
-
+  
   const defaultSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: name,
-    url: canonical,
-    logo: image,
-    description: description,
-    address: {
+    "name": name,
+    "url": canonical,
+    "logo": image,
+    "description": description,
+    "address": {
       "@type": "PostalAddress",
-      addressLocality: "Solna",
-      addressRegion: "Stockholm",
-      postalCode: "169 79",
-      streetAddress: "Stjärntorget 2",
-      addressCountry: "SE",
+      "addressLocality": "Solna",
+      "addressRegion": "Stockholm",
+      "postalCode": "169 79",
+      "streetAddress": "Stjärntorget 2",
+      "addressCountry": "SE"
     },
-    contactPoint: {
+    "contactPoint": {
       "@type": "ContactPoint",
-      telephone: "+46-70-221-8022",
-      contactType: "customer service",
-      email: "info@almfors.se",
+      "telephone": "+46-70-221-8022",
+      "contactType": "customer service",
+      "email": "info@almfors.se"
     },
-    sameAs: ["https://instagram.com/almfors.se"],
+    "sameAs": [
+      "https://instagram.com/almfors.se"
+    ]
   };
 
   return (
@@ -74,10 +76,7 @@ const SEO = ({
 
       {/* Additional meta tags for SEO */}
       <meta name="author" content={name} />
-      <meta
-        name="keywords"
-        content="webbdesign, webbyrå, hemsida, webbplats, sociala medier, digital marknadsföring, SEO, webbutveckling, Stockholm, Sverige"
-      />
+      <meta name="keywords" content="webbdesign, webbyrå, hemsida, webbplats, sociala medier, digital marknadsföring, SEO, webbutveckling, Stockholm, Sverige" />
       <meta name="geo.region" content="SE-AB" />
       <meta name="geo.placename" content="Stockholm" />
       <meta name="geo.position" content="59.3293;18.0686" />

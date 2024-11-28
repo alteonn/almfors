@@ -25,11 +25,11 @@
     --ring: 240 5.9% 10%;
     --radius: 0.75rem;
 
-    /* Accent colors */
-    --accent-blue: 220 70% 50%;
-    --accent-purple: 260 70% 50%;
-    --accent-teal: 180 70% 40%;
-    --accent-orange: 30 95% 60%;
+    /* Enhanced accent colors with more vibrant hues */
+    --accent-blue: 230 85% 60%;
+    --accent-purple: 270 85% 60%;
+    --accent-teal: 175 85% 45%;
+    --accent-orange: 25 95% 65%;
   }
 
   .dark {
@@ -53,11 +53,11 @@
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
 
-    /* Dark mode accent colors */
-    --accent-blue: 220 70% 60%;
-    --accent-purple: 260 70% 60%;
-    --accent-teal: 180 70% 50%;
-    --accent-orange: 30 95% 70%;
+    /* Enhanced dark mode accent colors */
+    --accent-blue: 230 85% 70%;
+    --accent-purple: 270 85% 70%;
+    --accent-teal: 175 85% 55%;
+    --accent-orange: 25 95% 75%;
   }
 }
 
@@ -127,4 +127,27 @@
   }
 }
 
-/* Rest of the CSS remains the same */
+/* Enhanced utility classes */
+@layer utilities {
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--accent-blue))] via-[hsl(var(--accent-purple))] to-[hsl(var(--accent-teal))];
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .hover-glow {
+    @apply hover:shadow-[0_0_30px_rgba(var(--accent-blue),0.2)];
+  }
+
+  .gradient-border {
+    @apply relative before:absolute before:inset-0 before:p-[1px] before:bg-gradient-to-r before:from-[hsl(var(--accent-blue))] before:to-[hsl(var(--accent-purple))] before:rounded-md before:-z-10 before:opacity-0 hover:before:opacity-100 before:transition-opacity;
+  }
+
+  .bg-grid-pattern {
+    background-image: linear-gradient(to right, hsl(var(--accent-blue) / 0.1) 1px, transparent 1px),
+                      linear-gradient(to bottom, hsl(var(--accent-blue) / 0.1) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
