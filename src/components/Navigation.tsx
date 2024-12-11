@@ -18,7 +18,6 @@ const menuItems = [
   { name: 'Hem', href: '/', icon: Home },
   { name: 'Webbdesign', href: '/webbdesign', icon: Globe },
   { name: 'Beställ', href: '/bestall', icon: ShoppingCart },
-  { name: 'Sociala medier', href: '/sociala-medier', icon: Share2 },
   { name: 'Varför Almfors?', href: '/varfor-almfors', icon: HelpCircle },
   { name: 'Om oss', href: '/om-oss', icon: Users },
   { name: 'Kundservice', href: '/kundservice', icon: MessageCircle },
